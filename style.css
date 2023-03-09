@@ -1,0 +1,39 @@
+.d_1{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width:auto;
+  height: auto;
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+div,body{
+  display: flex;
+  justify-content: center;
+}
+button{
+  height: 100px;
+  width: 100px;
+  margin: 5px 5px 5px;
+  border: solid 3px black;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  font-size: 30px;
+  font-weight: bold;
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+input{
+  width: 415px;
+  height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: solid 3px black;
+  border-radius: 5px;
+  font-size: 50px;
+  caret-color: transparent;
+  direction: rtl;
+  background-color: white;
+}
