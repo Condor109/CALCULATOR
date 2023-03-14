@@ -33,7 +33,6 @@ input{
   border: solid 3px black;
   border-radius: 5px;
   font-size: 50px;
-  caret-color: transparent;
-  direction: rtl;
   background-color: white;
+  text-align: end;
 }
