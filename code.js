@@ -1,6 +1,8 @@
 const buttons=document.querySelectorAll("button");
 const inpt=document.querySelector("input");
+const span=document.querySelector("span");
 var operations=[];
+var ppp=[];
 var point=false;
 
 function calculate(){
@@ -41,8 +43,32 @@ buttons.forEach((button)=>{
   else if(!['AC','C','=','.'].includes(button.innerHTML)){
     button.addEventListener('click',function(e){
       if(!['+','-','*','/'].includes(inpt.value[inpt.value.length-1])){
-        inpt.value+=e.currentTarget.innerHTML;
         point=false;
+        if(ppp[0]==null){
+          ppp.push(parseFloat(inpt.value));
+          inpt.value+=e.currentTarget.innerHTML;
+          ppp.push(e.currentTarget.innerHTML);
+          return;
+
+        }
+        let x=inpt.value.slice((inpt.value.lastIndexOf(ppp[1])+1),inpt.value.length);
+        console.log(x)
+        ppp.push(parseFloat(x));
+        console.log(ppp[2])
+        let pro=0
+        switch(ppp[1]){
+          case "+": pro=ppp[0]+ppp[2]; break;
+          case "-": pro=ppp[0]-ppp[2]; break;
+          case "*": pro=ppp[0]*ppp[2]; break;
+          case "/":  pro=ppp[0]/ppp[2]; break;
+        }
+        span.innerHTML=pro;
+        ppp=[pro];
+        console.log(ppp)
+        inpt.value+=e.currentTarget.innerHTML;
+        ppp.push(e.currentTarget.innerHTML);
+
+        
       }
 
     })
@@ -56,6 +82,8 @@ buttons[15].addEventListener('click',function(e){
 })
 buttons[0].addEventListener('click',()=>{
   inpt.value=""
+  span.innerHTML="0";
+  ppp=[];
 })
 buttons[1].addEventListener('click',()=>{
   inpt.value=inpt.value.slice(0,inpt.value.length-1)
