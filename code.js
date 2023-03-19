@@ -5,6 +5,21 @@ var operations=[];
 var ppp=[];
 var point=false;
 
+function calculate_2(){
+  
+  let x=inpt.value.slice((inpt.value.lastIndexOf(ppp[1])+1),inpt.value.length);
+  ppp.push(parseFloat(x));
+  let pro=0
+  switch(ppp[1]){
+    case "+": pro=ppp[0]+ppp[2]; break;
+    case "-": pro=ppp[0]-ppp[2]; break;
+    case "*": pro=ppp[0]*ppp[2]; break;
+    case "/":  pro=ppp[0]/ppp[2]; break;
+  }
+  span.innerHTML=pro;
+  ppp=[pro];
+}
+
 function calculate(){
   let array=operations.map((elm,idx)=>elm=="*"||elm=="/" ? idx:'').filter(String);
   console.log(array)
@@ -44,6 +59,9 @@ buttons.forEach((button)=>{
     button.addEventListener('click',function(e){
       if(!['+','-','*','/'].includes(inpt.value[inpt.value.length-1])){
         point=false;
+        if(inpt.value==""){
+          inpt.value+="0";
+        }
         if(ppp[0]==null){
           ppp.push(parseFloat(inpt.value));
           inpt.value+=e.currentTarget.innerHTML;
@@ -51,20 +69,8 @@ buttons.forEach((button)=>{
           return;
 
         }
-        let x=inpt.value.slice((inpt.value.lastIndexOf(ppp[1])+1),inpt.value.length);
-        console.log(x)
-        ppp.push(parseFloat(x));
-        console.log(ppp[2])
-        let pro=0
-        switch(ppp[1]){
-          case "+": pro=ppp[0]+ppp[2]; break;
-          case "-": pro=ppp[0]-ppp[2]; break;
-          case "*": pro=ppp[0]*ppp[2]; break;
-          case "/":  pro=ppp[0]/ppp[2]; break;
-        }
-        span.innerHTML=pro;
-        ppp=[pro];
-        console.log(ppp)
+        
+        calculate_2();
         inpt.value+=e.currentTarget.innerHTML;
         ppp.push(e.currentTarget.innerHTML);
 
@@ -93,10 +99,11 @@ buttons[16].addEventListener('click',()=>{
   let axio=inpt.value;
   let c=0;
   let i=0;
-  
+
+  calculate_2();
+  ppp=[]
   while(i<axio.length){
     if(isNaN(parseFloat(axio[i])) && axio[i]!="."){
-      console.log(axio.slice(c,i))
       operations.push(parseFloat(axio.slice(c,i)));
       operations.push(axio[i]);
       c=i+1;
@@ -105,7 +112,6 @@ buttons[16].addEventListener('click',()=>{
     i++
   }
   operations.push(parseFloat(axio.slice(c,i)));
-  console.log(operations);
   calculate();
   operations=[];
 })
